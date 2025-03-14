@@ -1,4 +1,4 @@
-package com.example.JSON_Feed_Server;
+package com.example.JSON_Feed_Server.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

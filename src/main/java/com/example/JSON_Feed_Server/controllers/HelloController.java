@@ -1,5 +1,6 @@
-package com.example.JSON_Feed_Server;
+package com.example.JSON_Feed_Server.controllers;
 
+import com.example.JSON_Feed_Server.dto.Hello;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
