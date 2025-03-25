@@ -1,6 +1,6 @@
 package com.example.JSON_Feed_Server.controllers;
 
-import com.example.JSON_Feed_Server.dto.JsonFeedObject;
+import com.example.JSON_Feed_Server.dto.FeedObject;
 import com.example.JSON_Feed_Server.services.XkcdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,8 @@ public class XkcdController {
     }
 
     @GetMapping("/xkcd")
-    public JsonFeedObject getXkcd() {
-        return xkcdService.fetchXkcdData();
+    public FeedObject getXkcd() {
+//        return xkcdService.fetchXkcdPost();
+        return xkcdService.getJsonFeed();
     }
 }

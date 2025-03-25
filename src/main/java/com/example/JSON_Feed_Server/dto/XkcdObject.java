@@ -16,20 +16,25 @@ public class XkcdObject {
     public String title;
     public String day;
 
+
     @Override
     public String toString() {
-        return "XKCDComic{" +
-                "month='" + month + '\'' +
-                ", num=" + num +
-                ", link='" + link + '\'' +
-                ", year='" + year + '\'' +
-                ", news='" + news + '\'' +
-                ", safeTitle='" + safeTitle + '\'' +
-                ", transcript='" + transcript + '\'' +
-                ", alt='" + alt + '\'' +
-                ", img='" + img + '\'' +
-                ", title='" + title + '\'' +
-                ", day='" + day + '\'' +
-                '}';
+        return "XkcdObject{" +
+                "\n\tmonth='" + month + '\'' +
+                ",\n\t num=" + num +
+                ",\n\t link='" + link + '\'' +
+                ",\n\t year='" + year + '\'' +
+                ",\n\t news='" + news + '\'' +
+                ",\n\t safeTitle='" + safeTitle + '\'' +
+                ",\n\t transcript='" + transcript + '\'' +
+                ",\n\t alt='" + alt + '\'' +
+                ",\n\t img='" + img + '\'' +
+                ",\n\t title='" + title + '\'' +
+                ",\n\t day='" + day + '\'' +
+                "\n}";
+    }
+
+    public String miniToString() {
+        return "XkcdObject{num=" + num + "}";
     }
 }

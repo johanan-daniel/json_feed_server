@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class JsonFeedObject {
+public class FeedObject {
     public final String version = "https://jsonfeed.org/version/1.1";
     public final String language = "en-US";
     public String title;
@@ -20,9 +20,10 @@ public class JsonFeedObject {
     public String description;
     public String icon;
     public String favicon;
-    public List<FeedItem> items;
+    public List<PostObject> items;
 
-    public JsonFeedObject(String title, String homePageUrl, String feedUrl, String description, String icon, String favicon, List<FeedItem> items) {
+
+    public FeedObject(String title, String homePageUrl, String feedUrl, String description, String icon, String favicon, List<PostObject> items) {
         this.title = title;
         this.homePageUrl = homePageUrl;
         this.feedUrl = feedUrl;
@@ -34,7 +35,7 @@ public class JsonFeedObject {
 
     @Override
     public String toString() {
-        return "JsonFeedObject{" +
+        return "FeedObject{" +
                 "title='" + title + '\'' +
                 ", homePageUrl='" + homePageUrl + '\'' +
                 ", feedUrl='" + feedUrl + '\'' +
@@ -43,5 +44,9 @@ public class JsonFeedObject {
                 ", favicon='" + favicon + '\'' +
                 ", items=" + (items != null ? items.size() + " items" : "null") +
                 '}';
+    }
+
+    public String miniToString() {
+        return "FeedObject{url='" + feedUrl + "'}";
     }
 }

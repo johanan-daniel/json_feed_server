@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for json-feed-server-jd on 2025-03-13T20:20:59-04:00
+# fly.toml app configuration file generated for json-feedModel-server-jd on 2025-03-13T20:20:59-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'json-feed-server-jd'
+app = 'json-feedModel-server-jd'
 primary_region = 'fra'
 
 [build]
