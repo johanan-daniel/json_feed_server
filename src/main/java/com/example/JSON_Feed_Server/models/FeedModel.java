@@ -39,7 +39,7 @@ public class FeedModel {
     // WARNING: if postModels is included in this toString and feed is included in Posts' toString
     // an infinite loop will occur because each toString call will call toString on the other object
     @OneToMany(mappedBy = "feed")
-    private List<PostModel> postModels;
+    private List<PostModel> posts;
 
 
     public String getTitle() {
@@ -99,11 +99,11 @@ public class FeedModel {
     }
 
     public List<PostModel> getPosts() {
-        return postModels;
+        return posts;
     }
 
     public void setPosts(List<PostModel> postModels) {
-        this.postModels = postModels;
+        this.posts = postModels;
     }
 
     @Override

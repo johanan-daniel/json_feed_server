@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<PostModel, String> {
-    List<PostModel> findByFeedFeedUrl(String feedUrl);
+    List<PostModel> findByFeedFeedUrlOrderByDatePublishedDesc(String feedUrl);
 
     List<PostModel> findTop10ByFeedFeedUrlOrderByDatePublishedDesc(String feedUrl);
 
@@ -15,6 +15,7 @@ public interface PostRepository extends JpaRepository<PostModel, String> {
     PostModel findByUrl(String postUrl);
 
 //    @Query("SELECT p from PostModel p WHERE p.feed.feed")
+    // FIXME change to Asc
     PostModel findFirstByFeedFeedUrlOrderByDatePublishedDesc(String feedUrl);
 
     void deleteByUrl(String postUrl);

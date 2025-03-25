@@ -22,6 +22,6 @@ public class HttpRequestService {
     }
 
     public Boolean isSuccessful(HttpResponse<String> response) {
-        return response.statusCode() < 200 || response.statusCode() >= 300;
+        return !(response.statusCode() < 200 || response.statusCode() >= 300);
     }
 }

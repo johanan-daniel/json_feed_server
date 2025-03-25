@@ -54,26 +54,11 @@ public class XkcdService {
         return new PostObject(
                 xkcdObject.title,
                 url,
-                url,
                 xkcdObject.alt,
                 isoString,
                 descriptionTemplate,
                 xkcdObject.img
         );
-    }
-
-    public FeedObject createJsonFeed(PostObject postObject) {
-        String baseUrl = this.baseUrl;
-        String title = "xkcd";
-        String homePageUrl = "https://xkcd.com";
-        String feedUrl = baseUrl + "/articles/xkcd";
-        String description = "A webcomic of romance, sarcasm, math, and language.";
-        String icon = baseUrl + "/xkcd_icon.png";
-        String favicon = baseUrl + "/xkcd_icon_64.png";
-        List<PostObject> items = new ArrayList<>();
-        items.add(postObject);
-
-        return new FeedObject(title, homePageUrl, feedUrl, description, icon, favicon, items);
     }
 
     public PostObject fetchXkcdPost() {
@@ -104,6 +89,11 @@ public class XkcdService {
         FeedModel feedModel = feedService.getFeed(xkcdFeedUrl);
         PostObject xkcdItem = fetchXkcdPost();
 
+        if (xkcdItem == null) {
+            System.err.println("No xkcdItem received");
+            return null;
+        }
+
         Boolean postAlreadyExists = feedService.postAlreadyExists(xkcdItem.miniToString());
 
         if (!postAlreadyExists) {
@@ -116,14 +106,14 @@ public class XkcdService {
                 feedService.deleteOldestPost(oldestPostModel.getUrl());
             }
 
-            PostModel newPostModel = feedService.mapPostObjectToPost(xkcdItem, feedModel);
+            PostModel newPostModel = feedService.mapPostObjectToPostModel(xkcdItem, feedModel);
             System.out.println("New post: " + newPostModel.miniToString());
             feedService.savePost(newPostModel);
         }
 
-        List<PostModel> postModels = feedService.getPostsForFeed(xkcdFeedUrl);
+        List<PostModel> posts = feedService.getPostsForFeed(xkcdFeedUrl);
 //        TODO make into FeedObject somehow?
-//        return FeedObject
+        jsonFeed = feedService.mapFeedModelAndPostsToFeedObject(feedModel, posts);
 
         return jsonFeed;
     }

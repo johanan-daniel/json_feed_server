@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FeedObject {
@@ -21,9 +22,9 @@ public class FeedObject {
     public String icon;
     public String favicon;
     public List<PostObject> items;
+    public List<Map<String, String>> authors;
 
-
-    public FeedObject(String title, String homePageUrl, String feedUrl, String description, String icon, String favicon, List<PostObject> items) {
+    public FeedObject(String title, String homePageUrl, String feedUrl, String description, List<Map<String, String>> authors, String icon, String favicon, List<PostObject> items) {
         this.title = title;
         this.homePageUrl = homePageUrl;
         this.feedUrl = feedUrl;
@@ -31,6 +32,7 @@ public class FeedObject {
         this.icon = icon;
         this.favicon = favicon;
         this.items = items;
+        this.authors = authors;
     }
 
     @Override

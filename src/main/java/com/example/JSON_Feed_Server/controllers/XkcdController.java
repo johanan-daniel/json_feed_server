@@ -18,6 +18,12 @@ public class XkcdController {
     @GetMapping("/xkcd")
     public FeedObject getXkcd() {
 //        return xkcdService.fetchXkcdPost();
-        return xkcdService.getJsonFeed();
+        FeedObject jsonFeed = xkcdService.getJsonFeed();
+        if (jsonFeed == null) {
+            System.err.println("A problem occurred while processing the feed");
+            return null;
+        }
+
+        return jsonFeed;
     }
 }

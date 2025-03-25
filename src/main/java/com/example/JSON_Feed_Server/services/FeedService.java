@@ -1,5 +1,6 @@
 package com.example.JSON_Feed_Server.services;
 
+import com.example.JSON_Feed_Server.dto.FeedObject;
 import com.example.JSON_Feed_Server.dto.PostObject;
 import com.example.JSON_Feed_Server.models.FeedModel;
 import com.example.JSON_Feed_Server.models.PostModel;
@@ -42,7 +43,7 @@ public class FeedService {
     }
 
     public List<PostModel> getPostsForFeed(String feedUrl) {
-        return postRepository.findByFeedFeedUrl(feedUrl);
+        return postRepository.findByFeedFeedUrlOrderByDatePublishedDesc(feedUrl);
     }
 
     public long getPostsCountForFeed(String feedUrl) {
@@ -59,7 +60,7 @@ public class FeedService {
         postRepository.deleteByUrl(postUrl);
     }
 
-    public PostModel mapPostObjectToPost(PostObject postObject, FeedModel feedModel) {
+    public PostModel mapPostObjectToPostModel(PostObject postObject, FeedModel feedModel) {
         PostModel postModel = new PostModel();
 
         postModel.setFeed(feedModel);
@@ -81,5 +82,31 @@ public class FeedService {
         postModel.setImageUrl(postObject.image);
 
         return postModel;
+    }
+
+    public PostObject mapPostModelToPostObject(PostModel postModel) {
+        return new PostObject(
+                postModel.getTitle(),
+                postModel.getUrl(),
+                postModel.getSummary(),
+                postModel.getDatePublished().format(DateTimeFormatter.ISO_DATE_TIME),
+                postModel.getContent_html(),
+                postModel.getImageUrl()
+        );
+    }
+
+    public FeedObject mapFeedModelAndPostsToFeedObject(FeedModel feedModel, List<PostModel> posts) {
+        List<PostObject> postObjects = posts.stream().map(this::mapPostModelToPostObject).toList();
+
+        return new FeedObject(
+                feedModel.getTitle(),
+                feedModel.getHomePageUrl(),
+                feedModel.getFeedUrl(),
+                feedModel.getDescription(),
+                feedModel.getAuthors(),
+                feedModel.getIconUrl(),
+                feedModel.getFaviconUrl(),
+                postObjects
+        );
     }
 }

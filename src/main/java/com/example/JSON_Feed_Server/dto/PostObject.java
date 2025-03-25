@@ -3,6 +3,9 @@ package com.example.JSON_Feed_Server.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+import java.util.Map;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostObject {
     public String title;
@@ -18,11 +21,14 @@ public class PostObject {
 
     public String image;
 
+    // TODO mark as optional?
+    public List<Map<String, String>> authors;
 
-    public PostObject(String title, String url, String id, String summary, String datePublished, String contentHtml, String image) {
+
+    public PostObject(String title, String url, String summary, String datePublished, String contentHtml, String image) {
         this.title = title;
         this.url = url;
-        this.id = id;
+        this.id = url;
         this.summary = summary;
         this.datePublished = datePublished;
         this.contentHtml = contentHtml;
@@ -34,7 +40,6 @@ public class PostObject {
         return "PostObject{" +
                 "\n\t title='" + title + '\'' +
                 ",\n\t url='" + url + '\'' +
-                ",\n\t id='" + id + '\'' +
                 ",\n\t summary='" + summary + '\'' +
                 ",\n\t datePublished='" + datePublished + '\'' +
                 ",\n\t contentHtml='" + (contentHtml != null ? contentHtml.substring(0, Math.min(contentHtml.length(), 50)) + "..." : "null") + '\'' +
